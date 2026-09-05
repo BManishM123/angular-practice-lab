@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="page-header mb-4">
+        <div>
+            <h2>Lifecycle Hooks</h2>
+            <p>
+                For Observation of Angular Lifecycle Hooks
+            </p>
+        </div>
+    </div>
+<hr>
+
+    <div class="row g-4">
+
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header">
+                    Component
+                </div>
+
+                <div class="card-body text-center">
+                    <h1 class="display-4">
+                          {{counter}}
+                    </h1>
+
+                    <button class="btn btn-primary"
+                    (click)="increament()">
+                        Increment
+                    </button>
+                    <button class="btn btn-danger"
+                    (click)="resetCounter()">
+                        Reset
+                    </button>
+                  <p class="text-muted mt-3">
+                     Click the button and observe
+            the lifecycle behaviour.
+                  </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header">
+                    Lifecycle Events
+                </div>
+
+                <div class="card-body lifecycle-console">
+                    @for (log of lifecycleLogs; track $index){
+                        <div class="log-entry">
+                            {{log}}
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

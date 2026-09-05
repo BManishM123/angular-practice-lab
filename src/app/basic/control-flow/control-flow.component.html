@@ -1,0 +1,134 @@
+<div class="container-fluid">
+
+    <div class="page-header mb-4">
+
+        <div>
+            <h2>Angular Control Flow</h2>
+            <p class="text-muted mb-0">
+                Practice Directives {{directiveNames}}
+            </p>
+        </div>
+
+        <button mat-raised-button color="primary" (click)="toggleUsers()">
+            {{ showUsers ? 'Hide Users' : 'Show Users' }}
+        </button>
+
+    </div>
+
+    <hr>
+
+    <div class="card-body mb-4">
+
+        <div class="card-body">
+
+            <h5 class="card-title">
+                Filter Users
+            </h5>
+
+            <div class="filter-buttons">
+
+                <button mat-stroked-button [class.active-filter]="selectedRole === 'All'" (click)="filterByRole('All')">
+                    All
+                </button>
+                <button mat-stroked-button [class.active-filter]="selectedRole === 'Developer'"
+                    (click)="filterByRole('Developer')">
+                    Developer
+                </button>
+                <button mat-stroked-button [class.active-filter]="selectedRole === 'Designer'"
+                    (click)="filterByRole('Designer')">
+                    Designer
+                </button>
+                <button mat-stroked-button [class.active-filter]="selectedRole === 'Tester'"
+                    (click)="filterByRole('Tester')">
+                    Tester
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    @if (showUsers) {
+    <div class="row g-4">
+
+        @for (user of FilteredUsers; track user.id){
+
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card user-card h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5>
+                                {{user.name}}
+                            </h5>
+                            <p class="text-muted mb-2">
+                                {{user.role}}
+                            </p>
+                        </div>
+                        <span class="status-dot" [class.active]="user.status === 'Active'">
+
+                        </span>
+
+                    </div>
+                    @switch (user.role) {
+                    @case ('Developer') {
+                    <div class="role-info developer">
+                        💻 Frontend / Backend Development
+                    </div>
+                    }
+                    @case ('Designer') {
+                    <div class="role-info designer">
+                        🎨 UI / UX Design
+                    </div>
+                    }
+                    @case ('Tester') {
+                    <div class="role-info tester">
+                        🧪 Quality Assurance
+                    </div>
+                    }
+                    }
+
+                    <div class="mt-3">
+                        @if (user.status === 'Active') {
+                        <span class="badge bg-success">
+                            Active
+                        </span>
+                        } @else {
+                        <span class="badge bg-secondary">
+                            Inactive
+                        </span>
+                        }
+                        <!-- <span>
+                            {{user.status}}
+                        </span> -->
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+        } @empty {
+        <div class="col-12">
+            <div class="alert alert-info">
+                No users found for
+                <strong>{{ selectedRole }}</strong>.
+            </div>
+        </div>
+        }
+    </div>
+    } @else {
+
+    <div class="alert alert-warning">
+
+        User list is currently hidden.
+
+    </div>
+
+    }
+
+</div>

@@ -1,0 +1,55 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.active-filter {
+  background-color: #e3f2fd;
+}
+
+.user-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #adb5bd;
+
+  &.active {
+    background: #198754;
+  }
+}
+
+.role-info {
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.developer {
+  background: #e7f1ff;
+}
+
+.designer {
+  background: #f5eaff;
+}
+
+.tester {
+  background: #fff3cd;
+}
