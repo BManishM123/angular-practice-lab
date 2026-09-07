@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <h2>Dependency Injection</h2>
+
+    <p class="text-muted">
+        Using Angular's inject() Api
+    </p>
+
+    <div class="card">
+        <div class="card-body">
+            <h5>
+                Notification Service
+            </h5>
+            <p>
+                The component doesnot create the service itself, Angular provide it.
+            </p>
+
+            <div class="d-flex gap-2">
+
+                 <button
+          mat-raised-button
+          color="primary"
+          (click)="notify('Profile saved')">
+
+          Save Profile
+
+        </button>
+
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="notify('Data refreshed')">
+
+          Refresh Data
+
+        </button>
+
+
+            </div>
+        </div>
+    </div>
+</div>

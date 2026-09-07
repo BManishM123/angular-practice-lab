@@ -1,0 +1,117 @@
+<div class="container-fluid">
+    <div class="page-header mb-4">
+        <div>
+            <h3>
+                Reactive Forms
+            </h3>
+            <p>
+                -----------
+            </p>
+        </div>
+    </div>
+
+    <div class="card form-card">
+        <div class="card-body p-4">
+            <form [formGroup]="employeeForm" (ngSubmit)="submit()">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label for="form-label">
+                            Full Name
+                        </label>
+                        <input type="text" class="form-control" formControlName="name" placeholder="Enter Full Name">
+
+                        @if (
+                        employeeForm.controls.name.touched &&
+                        employeeForm.controls.name.invalid
+                        ) {
+
+                        <div class="text-danger mt-1">
+
+                            @if (
+                            employeeForm.controls.name
+                            .hasError('required')
+                            ) {
+
+                            Name is required.
+
+                            } @else {
+
+                            Minimum 3 characters required.
+
+                            }
+
+                        </div>
+
+                        }
+
+                    </div>
+
+                    <div class="com-md-6">
+                        <label for="form-label">
+                            Email
+                        </label>
+                        <input type="text" class="form-control" formControlName="email" placeholder="name@example.com">
+
+                        @if(employeeForm.controls.email.touched &&
+                        employeeForm.controls.email.invalid) {
+
+                        <div class="text-danger mt-1">
+                            Please enter a valid email.
+                        </div>
+                        }
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label for="form-label"></label>
+
+                        <select title="dropdown" class="form-select">
+                            <option>Developer</option>
+                            <option>Designer</option>
+                            <option>Tester</option>
+                            <option>DevOps</option>
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">
+                            Experience
+                        </label>
+                        <input type="number" class="form-control" formControlName="experience">
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-check">
+
+                            <input class="form-check-input" type="checkbox" formControlName="terms" id="terms">
+
+                            <label class="form-check-label" for="terms">
+
+                                I agree to the terms and conditions
+
+                            </label>
+
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex gap-2">
+
+                        <button type="button" class="btn btn-outline-secondary" (click)="reset()">
+
+                            Reset
+
+                        </button>
+
+                        <button type="submit" class="btn btn-primary">
+
+                            Submit
+
+                        </button>
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -71,9 +71,54 @@ export const routes: Routes = [
     },
 
     {
+        path:'',
+        redirectTo:'intermediate',
+        pathMatch:'full'
+    },
+
+    {
         path: 'intermediate',
         loadComponent: () =>
             import('./intermediate/intermediate/intermediate.component')
-        .then(m => m.IntermediateComponent)
+        .then(m => m.IntermediateComponent),
+
+        children: [
+            {
+                path: '',
+                loadComponent: () =>
+                    import('./intermediate/services/services.component')
+                .then(m => m.ServicesComponent)
+
+            },
+
+            {
+                path: 'service',
+                loadComponent: () => 
+                    import('./intermediate/services/services.component')
+                .then(m => m.ServicesComponent)
+            },
+
+            {
+                path: 'reactive-forms',
+                loadComponent: () => 
+                    import('./intermediate/reactive-forms/employee-registration/employee-registration.component')
+                .then(m => m.EmployeeRegistrationComponent)
+            },
+
+            {
+                path: 'dynamic-forms',
+                loadComponent: () =>
+                    import('./intermediate/dynamic-forms/skills-matrix/skills-matrix.component')
+                .then(m => m.SkillsMatrixComponent)
+            },
+
+            {
+                path: 'dep-inj',
+                loadComponent: () =>
+                    import('./intermediate/dependency-injection/notification/notification.component')
+                .then(m => m.NotificationComponent)
+            }
+        ]
     }
+    
 ];

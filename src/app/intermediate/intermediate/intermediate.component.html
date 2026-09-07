@@ -1,1 +1,28 @@
-<p>intermediate works!</p>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h4>Intermediate Section</h4>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <aside class="col-md-3  col-lg-2">
+            <a routerLink="service" routerLinkActive="active"
+                class="list-group-item list-group-item-action">Services</a>
+            <a routerLink="dep-inj" routerLinkActive="active"
+                class="list-group-item list-group-item-action">Dependency Injection</a>
+            <a routerLink="reactive-forms" routerLinkActive="active"
+                class="list-group-item list-group-item-action">Reactive Forms</a>
+            <a routerLink="dynamic-forms" routerLinkActive="active"
+                class="list-group-item list-group-item-action">Dynamic Forms</a>
+            <!-- <a routerLink="two-way-binding" routerLinkActive="active"
+                class="list-group-item list-group-item-action">Two-Way-Binding</a>
+            <a routerLink="lifecycle" routerLinkActive="active" class="list-group-item list-group-item-action">Lifecycle
+                Hooks</a>
+            <a routerLink="pipes" routerLinkActive="active" class="list-group-item list-group-item-action">Pipes</a> -->
+        </aside>
+        <section class="col-md-9">
+            <router-outlet></router-outlet>
+        </section>
+    </div>
+</div>
