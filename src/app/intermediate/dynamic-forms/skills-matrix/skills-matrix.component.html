@@ -1,1 +1,94 @@
 <p>skills-matrix works!</p>
+<div class="container-fluid">
+
+  <div class="page-header mb-4">
+
+    <div>
+
+      <h2>Dynamic Forms</h2>
+
+      <p class="text-muted">
+        FormArray and dynamically generated controls
+      </p>
+
+    </div>
+
+    <button
+      class="btn btn-primary"
+      (click)="addSkill()">
+
+      + Add Skill
+
+    </button>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="card-body">
+
+      <form [formGroup]="skillForm">
+
+        <div formArrayName="skills">
+
+          @for (
+            skill of skills.controls;
+            track $index;
+            let i = $index
+          ) {
+
+            <div
+              class="skill-row"
+              [formGroupName]="i">
+
+              <input
+                class="form-control"
+                formControlName="name"
+                placeholder="Skill name">
+                <br>
+
+
+              <select
+                class="form-select"
+                formControlName="level">
+
+                <option>Beginner</option>
+                <option>Intermediate</option>
+                <option>Advanced</option>
+                <option>Expert</option>
+
+              </select>
+
+              <br>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                (click)="removeSkills(i)"
+                [disabled]="skills.length === 1">
+
+                Remove
+
+              </button>
+
+            </div>
+
+          }
+
+        </div>
+
+        <button
+          class="btn btn-success mt-4"
+          (click)="submit()">
+
+          Save Skills
+
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
