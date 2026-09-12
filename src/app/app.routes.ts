@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { AdvancedComponent } from './advanced/advanced/advanced.component';
+import { authGuard } from './core/guard/auth.guard';
 
 export const routes: Routes = [
     {
@@ -119,6 +121,41 @@ export const routes: Routes = [
                 .then(m => m.NotificationComponent)
             }
         ]
+    },
+
+    {
+        path: 'advanced',
+        loadComponent: () =>
+            import('./advanced/advanced/advanced.component')
+        .then(m => m.AdvancedComponent),
+
+        children: [
+            {
+                path:'',
+                redirectTo: 'integration-lab',
+                pathMatch: 'full'
+            },
+
+            {
+                path: 'integration-lab',
+                loadComponent: () => 
+                    import('./advanced/integration-lab/integration-lab.component')
+                .then(m => m.IntegrationLabComponent)
+            },
+
+            {
+                path: 'protected',
+                canActivate: [authGuard],
+                loadComponent: () =>
+                    import('./advanced/integration-lab/integration-lab.component')
+                .then(m =>m.IntegrationLabComponent)
+            }
+        ]
+    },
+
+    {
+        path: '**',
+        redirectTo: 'basic'
     }
     
 ];

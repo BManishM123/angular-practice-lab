@@ -1,0 +1,332 @@
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <span class="badge bg-dark mb-4">
+                Angular Integration Lab
+            </span>
+            <p class="text-muted mb-4">
+                Routing • Guards • HTTP • RxJS • Lazy Loading
+            </p>
+        </div>
+
+        <div class="text-end">
+            <div class="small text-muted mb-1">
+                API Status
+            </div>
+            <span class="badge bg-success">
+                {{requestStatus}}
+            </span>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h5 class="fw-semibold">
+                        🔐 Route Guard Playground
+                    </h5>
+                    <p class="text-muted mb-4">
+                        Toggle login status and try navigating to
+                        the protected route.
+                    </p>
+
+                </div>
+
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    @if(isLoggedIn$ | async) {
+                    <span class="badge bg-success me-3">
+                        Logged In
+                    </span>
+                    <button class="btn btn-outline-danger" (click)="logout()">
+                        LogOut
+                    </button>
+                    } @else {
+                    <span class="badge bg-secondary me-3">
+                        Logged Out
+                    </span>
+
+                    <button class="btn btn-primary" (click)="login()">
+
+                        Login
+
+                    </button>
+                    }
+                    <button class="btn btn-dark ms-2" (click)="openProtectedRoute()">
+
+                        Protected Route
+
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h5 class="fw-semibold">
+                        👥 User API Dashboard
+                    </h5>
+
+                    <p class="text-muted">
+                        HttpClient + Observable + Interceptor
+                    </p>
+                    <input type="text" class="form-control" placeholder="Search users..." [(ngModel)]="searchTerm">
+
+                </div>
+                 <div class="col-md-4 text-md-end mt-3">
+
+          <button
+            class="btn btn-outline-primary"
+            (click)="loadUsers()">
+
+            ↻ Refresh API
+
+          </button>
+
+        </div>
+            </div>
+        </div>
+    </div>
+      <!-- Error -->
+  @if (errorMessage) {
+
+    <div class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
+  }
+    <!-- Loading -->
+  @if (loading) {
+
+    <div class="text-center py-5">
+
+      <div
+        class="spinner-border text-primary">
+      </div>
+
+      <p class="text-muted mt-3">
+        Calling API...
+      </p>
+
+    </div>
+
+  }
+  <!-- User Cards -->
+  @if (!loading) {
+
+    <div class="row g-4">
+
+      @for (
+        user of filteredUsers;
+        track user.id
+      ) {
+
+        <div class="col-md-6 col-xl-3">
+
+          <div class="card user-card h-100 shadow-sm">
+
+            <div class="card-body">
+
+              <div
+                class="avatar mb-3">
+
+                {{ user.name.charAt(0) }}
+
+              </div>
+
+              <h5 class="fw-semibold">
+                {{ user.name }}
+              </h5>
+
+              <p class="text-muted small mb-2">
+                {{ user.email }}
+              </p>
+
+              <span class="badge bg-light text-dark mb-3">
+                {{ user.role }}
+              </span>
+
+              <p class="small">
+                Experience:
+                <strong>
+                  {{ user.experience }} years
+                </strong>
+              </p>
+
+              <span
+                class="badge"
+                [class.bg-success]="user.status === 'Active'"
+                [class.bg-secondary]="user.status !== 'Active'">
+
+                {{ user.status }}
+
+              </span>
+
+            </div>
+
+            <div class="card-footer bg-white border-0">
+
+              <button
+                class="btn btn-sm btn-outline-primary me-2"
+                (click)="loadUserUsingAsyncAwait(user.id!)">
+
+                View
+
+              </button>
+
+              <button
+                class="btn btn-sm btn-outline-danger"
+                (click)="deleteUser(user.id!)">
+
+                Delete
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      } @empty {
+
+        <div class="text-center py-5">
+
+          <h5>No users found</h5>
+
+          <p class="text-muted">
+            Try a different search term.
+          </p>
+
+        </div>
+
+      }
+
+    </div>
+
+  }
+
+
+  <!-- Selected User -->
+  @if (selectedUser$ | async; as selectedUser) {
+
+    <div class="card shadow-sm border-0 mt-4">
+
+      <div class="card-body">
+
+        <div
+          class="d-flex justify-content-between">
+
+          <div>
+
+            <h5 class="fw-semibold">
+              Selected User
+            </h5>
+
+            <p class="mb-1">
+              {{ selectedUser.name }}
+            </p>
+
+            <p class="text-muted mb-0">
+              {{ selectedUser.email }}
+            </p>
+
+          </div>
+
+          <span class="badge bg-primary align-self-start">
+            Async / Await
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+
+  <!-- Concepts -->
+  <div class="card shadow-sm border-0 mt-4">
+
+    <div class="card-body">
+
+      <h5 class="fw-semibold mb-4">
+        What this page demonstrates
+      </h5>
+
+      <div class="row g-3">
+
+        <div class="col-md-4">
+          <div class="concept">
+            <strong>Routing</strong>
+            <span>URL → Component</span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="concept">
+            <strong>Lazy Loading</strong>
+            <span>loadComponent()</span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="concept">
+            <strong>Route Guard</strong>
+            <span>CanActivateFn</span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="concept">
+            <strong>HttpClient</strong>
+            <span>GET / POST / PUT / DELETE</span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="concept">
+            <strong>Observable</strong>
+            <span>Reactive API stream</span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="concept">
+            <strong>BehaviorSubject</strong>
+            <span>Shared application state</span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="concept">
+            <strong>Async Pipe</strong>
+            <span>Automatic subscription</span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="concept">
+            <strong>Async / Await</strong>
+            <span>Promise-style API handling</span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="concept">
+            <strong>Interceptor</strong>
+            <span>Headers + logging + timing</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

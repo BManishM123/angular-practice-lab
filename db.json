@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Manish",
+      "email": "manish@example.com",
+      "role": "Frontend Developer",
+      "experience": 5,
+      "status": "Active"
+    },
+    {
+      "id": "2",
+      "name": "Rahul",
+      "email": "rahul@example.com",
+      "role": "Angular Developer",
+      "experience": 4,
+      "status": "Active"
+    },
+    {
+      "id": "4",
+      "name": "Arjun",
+      "email": "arjun@example.com",
+      "role": "React Developer",
+      "experience": 6,
+      "status": "Active"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
