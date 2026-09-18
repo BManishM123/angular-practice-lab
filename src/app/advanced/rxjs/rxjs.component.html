@@ -1,0 +1,121 @@
+<div class="container-fluid py-4">
+    <div class="mb-4">
+        <span class="badge bg-dark mb-2">
+            RXJS Lab
+        </span>
+
+        <h2 class="fw-bold">
+            Reactive Programming Playground
+        </h2>
+
+        <p class="text-muted">
+            Practice RxJs Operator
+        </p>
+    </div>
+
+    <!-- Search -->
+
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="fw-semibold">
+                🔎 Debounced API Search
+            </h5>
+
+            <p class="text-muted-small">
+                Subject → debounceTime → distinctUntilChanged
+                → switchMap → retry → catchError
+            </p>
+
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Users . . ." [(ngModel)]='searchTerm'
+                    (input)="onSearch()">
+
+                <span class="input-group-text">
+                    Requests: {{requestCount}}
+                </span>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Search Results -->
+
+    <div class="row g-3 mb-4">
+        @if(searchResults$ | async; as users) {
+        @for (user of users; track user.id){
+        <div class="col-md-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h6 class="fw-semibold">
+                        {{user.name}}
+                    </h6>
+                    <p class="small text-muted">
+                        {{ user.email }}
+                    </p>
+
+                    <span class="badge bg-light text-dark">
+                        {{ user.role }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        }@empty {
+
+        <div class="col-12">
+            <div class="alert alert-light">
+                No matching users.
+            </div>
+        </div>
+
+        }
+        }
+    </div>
+<!-- BehaviourSubject -->
+
+
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body">
+        <h5 class="fw-semibold">
+             🎯 BehaviorSubject + combineLatest 
+        </h5>
+
+        <div class="btn-group mb-3">
+            @for(role of roles; track role) {
+              <button
+            class="btn"
+            [class.btn-dark]="selectedRole === role"
+            [class.btn-outline-dark]="selectedRole !== role"
+            (click)="changeRole(role)">
+
+            {{ role }}
+
+          </button>  
+            }
+        </div>
+
+        @if(filteredUsers$ | async; as users){
+            <p class="text-muted">
+                {{users.length}} matching users
+            </p>
+        }
+    </div>
+</div>
+<!-- forkJoin -->
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body">
+        <h5 class="fw-semibold">
+           ⚡ Parallel API Requests 
+        </h5>
+        <p class="text-muted">
+            forkJoin waits until all HttP Observables complete
+        </p>
+
+        <button (click)="loadMultipleRequests()" class="btn btn-primary">
+            Execute forkJoin
+        </button>
+    </div>
+</div>
+
+</div>

@@ -144,6 +144,56 @@ export const routes: Routes = [
             },
 
             {
+                path: 'rxjs',
+                loadComponent: () =>
+                    import('./advanced/rxjs/rxjs.component')
+                .then(m => m.RxjsComponent)
+            },
+
+            {
+                path: 'signals',
+                loadComponent: () =>
+                    import('./advanced/signals/signals.component')
+                .then(m => m.SignalsComponent)
+            },
+
+            {
+                path: 'content-projection',
+                loadComponent: () =>
+                    import('./advanced/content-projection/content-projection.component')
+                .then(m => m.ContentProjectionComponent)
+            },
+
+            {
+                path: 'change-detection',
+                loadComponent: () =>
+                    import('./advanced/change-detection/change-detection.component')
+                .then(m => m.ChangeDetectionComponent)
+            },
+
+            {
+                path: 'defer',
+                loadComponent: () =>
+                    import('./advanced/defer/defer.component')
+                .then(m => m.DeferComponent)
+            },
+
+            {
+                path: 'performance',
+                loadComponent: () =>
+                    import('./advanced/performance/performance.component')
+                .then(m => m.PerformanceComponent)
+            },
+
+            {
+                path: 'dyanamic-components',
+                loadComponent: () =>
+                    import('./advanced/dynamic-components/dynamic-components.component')
+                .then(m => m.DynamicComponentsComponent)
+            },
+
+
+            {
                 path: 'protected',
                 canActivate: [authGuard],
                 loadComponent: () =>
